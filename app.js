@@ -20,7 +20,7 @@ let doGitHubAccept = async function() {
     }
 
     // Create the headers used to send requests to the API
-    let headers = { "Accept": "application/vnd.github.v3+json", "Authorization": "token " + access_token }
+    let headers = { "Accept": "application/vnd.github.v3+json", "Authorization": "token " + access_token, "User-Agent": "node-v" + process.version + "-accept-github-invitations" };
     console.log("Got access token and built headers");
 
     // Global definition for loop persistence

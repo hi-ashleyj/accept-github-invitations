@@ -5,6 +5,8 @@ This is a basic utility that can automatically accept repo invitations for githu
 ### Requirements
 Node.js, tested on 14.x but should be fine on most modern versions
 
+A Personal Access Token with repo:invite permissions. Get one at Github > Settings > Developer Settings > Personal Access Tokens and be sure to select repo:invite scopes before generation
+
 ### Usage
 1. Clone the repo
 ```bash
