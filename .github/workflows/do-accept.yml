@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Checkout repo
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
     
     - name: Use Node.js 14.x
       uses: actions/setup-node@v1
@@ -18,4 +18,4 @@ jobs:
         node-version: 14.x
     # No dependencies needed yet
     - name: Run Script
-    - run: node app.js --token {{ secrets.INVITE_ACCESS_TOKEN }}
+      run: node app.js --token {{ secrets.INVITE_ACCESS_TOKEN }}
