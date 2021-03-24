@@ -29,5 +29,10 @@ or, if you want to pass in your access token instead, use
 node app.js --token <YOUR_TOKEN_HERE>
 ```
 
+### Using the action
+1. Create your own copy of the repo (however you like to do this)
+2. Add a secret (Repo Settings > Secrets) called INVITE_ACCESS_TOKEN with your access token
+3. Execute the workflow run from the actions tab.
+
 ## License
 Feel free to use this basic script however you like, and modify it to add always-running or at-time based refreshing. I accept PRs and Issues on the base script, not on any modified versions.
