@@ -1,0 +1,19 @@
+{
+  "name": "accept-github-invitations",
+  "version": "0.1.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hi-ashleyj/accept-github-invitations.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hi-ashleyj/accept-github-invitations/issues"
+  },
+  "homepage": "https://github.com/hi-ashleyj/accept-github-invitations#readme"
+}
