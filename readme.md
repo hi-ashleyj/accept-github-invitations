@@ -12,7 +12,7 @@ A Personal Access Token with repo:invite permissions. Get one at Github > Settin
 ```bash
 git clone https://github.com/hi-ashleyj/accept-github-invitations.git
 ```
-2. Add your access token from github to config.json
+2. Create a config.json file in the root directory and add a Personal Access Token with repo:invite scope
 ```json
 {
     "access_token": "<YOUR_TOKEN_HERE>"
@@ -23,6 +23,10 @@ git clone https://github.com/hi-ashleyj/accept-github-invitations.git
 node app.js
 # or
 npm start
+```
+or, if you want to pass in your access token instead, use
+```bash
+node app.js --token <YOUR_TOKEN_HERE>
 ```
 
 ## License

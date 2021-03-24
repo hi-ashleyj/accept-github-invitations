@@ -2,20 +2,32 @@ let uti = require("./util.js");
 let fs = require("fs").promises;
 let path = require("path");
 
+let passed_token = null;
 
+for (let i = 0; i < process.argv.length; i++) {
+    if (process.argv[i] == "--token") {
+        if (process.argv[i + 1]) {
+            passed_token = process.argv[i + 1];
+        }
+    }
+}
 
 let doGitHubAccept = async function() {
     // Retrieve the Personal Access Token from config.json
     let access_token = "";
-    try {
-        access_token = JSON.parse(await fs.readFile(path.resolve(__dirname, "config.json"), { encoding: 'utf8' })).access_token;
-    } catch (_err) {
-        console.log("Error getting your access token: please check that config.json exists and is valid JSON");
-        return;
+    if (passed_token) {
+        access_token = passed_token;
+    } else {
+        try {
+            access_token = JSON.parse(await fs.readFile(path.resolve(__dirname, "config.json"), { encoding: 'utf8' })).access_token;
+        } catch (_err) {
+            console.log("Error getting your access token: please check that config.json exists and is valid JSON");
+            return;
+        }
     }
     
     if (access_token.length < 1) {
-        console.log("You need to add an access token to config.json");
+        console.log("You need to add an access token to config.json, or pass one in using --token");
         return;
     }
 
