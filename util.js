@@ -94,7 +94,7 @@ Util.hPost = function(url, headers, body) {
                 reject(err);
             });
         });
-        req.write(body);
+        if (body) { req.write(body); }
         req.end();
     });
 };
@@ -116,7 +116,7 @@ Util.hPatch = function(url, headers, body) {
                 reject(err);
             });
         });
-        req.write(body);
+        if (body) { req.write(body); }
         req.end();
     });
 };
