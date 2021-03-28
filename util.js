@@ -121,4 +121,26 @@ Util.hPatch = function(url, headers, body) {
     });
 };
 
+Util.hDelete = function(url, headers, body) {
+    return new Promise((resolve, reject) => {
+        let req = https.request(url, {headers: headers, method: "DELETE"}, (href) => {
+            let buffer = Buffer.from([]);
+
+            href.on("data", (data) => {
+                buffer = Buffer.concat([buffer, data]);
+            });
+
+            href.on("end", () => {
+                resolve(buffer.toString());
+            });
+
+            href.on("error", (err) => {
+                reject(err);
+            });
+        });
+        if (body) { req.write(body); }
+        req.end();
+    });
+};
+
 module.exports = Util;
