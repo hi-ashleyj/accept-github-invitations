@@ -98,26 +98,37 @@ let doGitHubAccept = async function() {
             let verdict = !strictMode;
             let invitationID = res.id;
 
+            // Pull response data
+            let owner = res.repository.owner.login;
+            let inviter = res.inviter.login;
 
-
-
-            // Send PATCH request to accept invitation
-            try {
-                await uti.hPatch("https://api.github.com/user/repository_invitations/" + invitationID, headers);
-                console.log("Accepted invite #" + invitationID);
-            } catch (_err) {
-                console.log("Error accepting invite #" + invitationID);
+            // Accept people on the allowlist (in case of strict mode)
+            if (allowList.includes(owner) || allowList.includes(inviter)) {
+                verdict = true;
             }
 
-            // Send DELETE request to deny invitation
+            // ALWAYS deny owner/inviters that are on the denylist, regardless of allowlist
+            if (denyList.includes(owner) || denyList.includes(inviter)) {
+                verdict = false;
+            };
 
-            // try {
-            //     await uti.hDelete("https://api.github.com/user/repository_invitations/" + invitationID, headers);
-            //     console.log("Denied invite #" + invitationID);
-            // } catch (_err) {
-            //     console.log("Error denying invite #" + invitationID);
-            // }
-            
+            if (verdict) {
+                // Send PATCH request to accept invitation
+                try {
+                    await uti.hPatch("https://api.github.com/user/repository_invitations/" + invitationID, headers);
+                    console.log("Accepted invite #" + invitationID);
+                } catch (_err) {
+                    console.log("Error accepting invite #" + invitationID);
+                }
+            } else {
+                // Send DELETE request to deny invitation
+                try {
+                    await uti.hDelete("https://api.github.com/user/repository_invitations/" + invitationID, headers);
+                    console.log("Denied invite #" + invitationID);
+                } catch (_err) {
+                    console.log("Error denying invite #" + invitationID);
+                }
+            }
         }
 
         console.log("Batch complete.")
